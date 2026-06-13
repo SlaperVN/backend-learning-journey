@@ -1,0 +1,3 @@
+- Mình đã học: Request/Response, 5 method, 5 status code
+- Cách dùng curl: -X, -H, -d
+- Postman: tạo collection, gửi request, xem headers
