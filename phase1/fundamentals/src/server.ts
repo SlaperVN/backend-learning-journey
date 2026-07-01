@@ -67,6 +67,10 @@ async function handleRequest(req: IncomingMessage, res: ServerResponse) {
   // Routing đơn giản
   if (parsedReq.url === '/health') {
     response.body = JSON.stringify({ status: 'OK', timestamp: new Date().toISOString() });
+    // Thêm cache control: cache 10 giây
+    response.headers['Cache-Control'] = 'public, max-age=10';
+    response.headers['ETag'] = `"${Buffer.from(response.body).toString('base64')}"`; // ETag đơn giản từ body
+    response.headers['Last-Modified'] = new Date().toISOString();
   } else if (parsedReq.url === '/echo' && parsedReq.method === 'POST') {
     response.body = JSON.stringify({
       echo: parsedReq.body || 'No body provided',
